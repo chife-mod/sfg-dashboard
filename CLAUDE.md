@@ -1,12 +1,40 @@
-# SF Projects Dashboard — Project Memory
+# SFG Dashboard — Project Memory
+
+> **🟡 СТАТУС НА 2026-05-10 — РЕСТРУКТУРИЗАЦИЯ В ПРОЦЕССЕ, ПАУЗА ДО 2026-05-12.**
+>
+> Клиент (Vsevolod) прислал письмо с видением структуры всех SF-проектов. Сегодня Олег + Claude провели брейншторм, согласовали таксономию (4 типа: report / prototype / tool / misc) и 3-уровневую иерархию для отчётов (`<template>/<type>/<client>/`).
+>
+> **Во вторник 12 мая** — созвон Олег ↔ Vsevolod, после которого финализируем open questions и стартуем имплементацию.
+>
+> **На следующий запуск Claude:**
+> 1. Прочитай [`docs/plans/2026-05-10-vsevolod-restructure-design.md`](docs/plans/2026-05-10-vsevolod-restructure-design.md) сверху вниз — там вся актуальная картина.
+> 2. Загляни в [`docs/plans/_archive/2026-05-05-monorepo-migration.md`](docs/plans/_archive/2026-05-05-monorepo-migration.md) — детальный 24-task план миграции с Vite-конфигом и cross-repo deploy strategy. Не выкидывать, использовать как референс при имплементации.
+> 3. Получи у Олега ответы на open questions (см. конец design-doc'а).
+> 4. Только потом вызывай `superpowers:writing-plans`.
+
+---
 
 ## Что это
 
 Статический дашборд-индекс всех веб-проектов, сделанных для Semantic Force Group.
-Деплоится на GitHub Pages: **https://chife-mod.github.io/SF-Projects-Dashboard/**
+Деплоится на GitHub Pages: **https://chife-mod.github.io/sfg-dashboard/** *(переименован из SF-Projects-Dashboard 2026-05-10)*
 
-Репозиторий: `chife-mod/SF-Projects-Dashboard` (public)
-Локальный путь: `/Users/oleg/My Drive/Dev/Project/Vsevolod/!SF Projects Dashboard!/`
+Репозиторий: `chife-mod/sfg-dashboard` (public)
+Локальный путь: `/Users/oleg/Dev/Vsevolod/!sfg-dashboard!/`
+
+---
+
+## Активные локальные превью (порты 4200-4206)
+
+| Порт | Проект | Откуда |
+|---|---|---|
+| 4200 | sfg-dashboard | этот HTML |
+| 4201 | w360-pdf-reports | `Watch360 PDF Reports/dist/` |
+| 4202 | w360-linkedin-pdf | `Watch360_LinkedIn_PDF_animations_remotion/report-pdf/dist/` |
+| 4203 | figma-to-ppt | `Figma_To_PPT/` (Next.js dev) |
+| 4204 | m360-jewelry-weekly-pulse | `M360-jewelry-weekly-pulse/dist/` |
+| 4205 | m360-signal-selector | `Market360_Signal_Selector/out/` |
+| 4206 | wwg-2026-novelties-redesign | `WWG 2026 Novelties Page Redesign/prototype/dist/` |
 
 ---
 
