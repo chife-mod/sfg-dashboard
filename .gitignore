@@ -5,3 +5,6 @@ node_modules/
 .idea/
 .vscode/
 *.log
+
+# Claude Code workspace (worktrees, etc.) — local only
+.claude/
