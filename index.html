@@ -503,12 +503,19 @@
     .info-tag {
       font-size: 9px;
       font-weight: 500;
-      color: var(--text-muted);
-      padding: 1px 6px;
+      color: var(--text-secondary);
+      padding: 2px 7px;
       border-radius: 3px;
-      background: rgba(255,255,255,0.03);
-      letter-spacing: 0.04em;
-      text-transform: lowercase;
+      background: rgba(255,255,255,0.04);
+      letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .info-tag-key {
+      color: rgba(255,255,255,0.22);
+      font-weight: 500;
     }
 
     /* ─── Section header ─── */
@@ -799,7 +806,8 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card"
+             data-customer="__sf-internal__" data-type="linkedin-novelties" data-platform="watch360" data-brand="watch360">
           <a class="card-link"
              href="https://chife-mod.github.io/watch360-linkedin-pdf/"
              target="_blank" rel="noopener"
@@ -826,7 +834,8 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card"
+             data-customer="__sf-internal__" data-type="linkedin-novelties" data-platform="watch360" data-brand="watch360">
           <a class="card-link"
              href="https://github.com/chife-mod/watch360-remotion"
              target="_blank" rel="noopener"
@@ -873,7 +882,8 @@
 
       <div class="grid">
 
-        <div class="card">
+        <div class="card"
+             data-customer="__sf-internal__" data-type="novelties" data-platform="watch360" data-brand="watch360">
           <a class="card-link"
              href="https://chife-mod.github.io/wwg-2026-novelties-redesign/"
              target="_blank" rel="noopener"
@@ -900,7 +910,8 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card"
+             data-customer="__sf-internal__" data-type="signal-selector" data-platform="market360" data-brand="market360">
           <a class="card-link"
              href="https://chife-mod.github.io/Market360_Signal_Selector/"
              target="_blank" rel="noopener"
@@ -927,7 +938,8 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card"
+             data-customer="__sf-internal__" data-type="command-center">
           <a class="card-link"
              href="https://github.com/chife-mod/business-school-command-center"
              target="_blank" rel="noopener"
@@ -960,7 +972,8 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card"
+             data-customer="__sf-internal__" data-type="chat-widget">
           <a class="card-link"
              href="https://github.com/chife-mod/manu-ai"
              target="_blank" rel="noopener"
@@ -993,7 +1006,8 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card"
+             data-customer="__sf-internal__" data-type="product-matching" data-platform="semanticforce" data-brand="semanticforce">
           <a class="card-link"
              href="https://github.com/chife-mod/sf-ui-apm"
              target="_blank" rel="noopener"
@@ -1058,7 +1072,8 @@
       <p class="section-sub">Non-code artifacts — sheets, documents.</p>
 
       <div class="grid">
-        <div class="card no-link">
+        <div class="card no-link"
+             data-customer="bilstein" data-type="sheets" data-platform="market360" data-brand="market360">
           <div class="card-cover">
             <img src="assets/covers/market360-sheets.png" alt="Market360 Google Sheets" loading="lazy" />
           </div>
@@ -1092,6 +1107,31 @@
     }
     window.addEventListener('hashchange', showScreen);
     showScreen();
+
+    // ─── Auto-render tag chips from data-attributes ───
+    // Each .card with one or more of data-customer/type/platform/brand
+    // gets a row of chips at the top of its .card-info block. Keeps the
+    // markup DRY: data-attrs drive both the filters and the visible tags.
+    (function renderCardTags() {
+      const TAG_KEYS = ['customer', 'type', 'platform', 'brand'];
+      const DISPLAY = { '__sf-internal__': 'SF-internal' };
+      document.querySelectorAll('.card').forEach(card => {
+        const tags = TAG_KEYS
+          .filter(k => card.dataset[k])
+          .map(k => {
+            const v = card.dataset[k];
+            const label = DISPLAY[v] || v;
+            return `<span class="info-tag"><span class="info-tag-key">${k}</span>${label}</span>`;
+          });
+        if (!tags.length) return;
+        const info = card.querySelector('.card-info');
+        if (!info) return;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'card-info-tags';
+        wrapper.innerHTML = tags.join('');
+        info.insertBefore(wrapper, info.firstChild);
+      });
+    })();
 
     // ─── Filters (data-attributes на карточках) ───
     document.querySelectorAll('.filters').forEach(filtersEl => {
