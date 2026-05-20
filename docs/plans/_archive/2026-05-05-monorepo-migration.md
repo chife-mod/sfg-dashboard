@@ -2,7 +2,24 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 >
-> **Status: 🟡 PAUSED — ждём вводные от Олега утром 2026-05-06.** См. секцию [Discussion log & open questions](#discussion-log--open-questions-2026-05-05) в конце.
+> **Status: ✅ SUPERSEDED on 2026-05-20.** A different incremental strategy
+> was executed instead — see [`../2026-05-20-restructure-handoff.md`](../2026-05-20-restructure-handoff.md) (section "🆕 Что появилось — монорепо chife-mod/sfg-reports").
+>
+> What changed from this plan:
+> - Repo named `sfg-reports` (not `sf-reports`) to match the SFG brand prefix.
+> - **Watch Media and Sachet stay frozen in their original repos** — not
+>   migrated. New decks live in `sfg-reports/products/<type>/<client>/`.
+>   This sidesteps the cross-repo deploy + PAT_DEPLOY risk entirely for
+>   client-facing URLs. Phases 2-5 of this plan are obsolete.
+> - Templates catalog deploys to a **new** public repo `chife-mod/sfg-templates-viewer`
+>   instead of being a third entry inside watch-media's repo.
+> - All 24 slide layouts (Watch Media + Sachet + sandbox variants) are
+>   registered in `shared/slides/` and visible at
+>   https://chife-mod.github.io/sfg-templates-viewer/.
+>
+> This file is kept as **historical reference** for the original architectural
+> reasoning (3-iteration hierarchy debate, alternatives considered, etc.).
+> Do not execute its tasks — they don't reflect the chosen path.
 
 **Goal:** Объединить `Watch360-PDF-Reports` и `M360-jewelry-weekly-pulse` в один монорепо `sf-reports` с общей библиотекой `shared/`. Сохранить оба боевых Pages-URL без изменений. Настроить cross-repo автодеплой через GitHub Actions. Обновить `SF-Projects-Dashboard`.
 

@@ -1,16 +1,26 @@
 # SFG Dashboard — Project Memory
 
-> **🟡 СТАТУС НА 2026-05-10 — РЕСТРУКТУРИЗАЦИЯ В ПРОЦЕССЕ, ПАУЗА ДО 2026-05-12.**
+> **✅ СТАТУС НА 2026-05-20 — РЕСТРУКТУРИЗАЦИЯ ЗАВЕРШЕНА. Mонорепо `chife-mod/sfg-reports` создан.**
 >
-> Клиент (Vsevolod) прислал письмо с видением структуры всех SF-проектов. Сегодня Олег + Claude провели брейншторм, согласовали таксономию (4 типа: report / prototype / tool / misc) и 3-уровневую иерархию для отчётов (`<template>/<type>/<client>/`).
+> Все Green Reports шаблоны живут в одном месте: `sfg-reports/shared/slides/`
+> (24 layouts, теги Cover / Overview / Table / Models / Keyword / Quote / Map /
+> Posts / Reviews / Heatmap / Sandbox / Unused). Templates catalog задеплоен
+> отдельным артефактом: https://chife-mod.github.io/sfg-templates-viewer/.
 >
-> **Во вторник 12 мая** — созвон Олег ↔ Vsevolod, после которого финализируем open questions и стартуем имплементацию.
+> Watch Media (feb-2026) и Sachet (apr-20-26) **frozen в своих репо** —
+> incremental migration: новые выпуски будут писаться в монорепо, старые
+> остаются как snapshot. Live URLs не сломаны.
+>
+> **Что осталось — ручные действия Олега** (см. [`docs/plans/2026-05-20-restructure-handoff.md`](docs/plans/2026-05-20-restructure-handoff.md) секция "Что осталось"):
+> 1. Создать PAT_DEPLOY secret в `sfg-reports` (5 мин) — для auto-deploy Templates
+> 2. `gh auth refresh -h github.com -s delete_repo` → удалить 3 устаревших репо
+> 3. Отозвать leaked PAT (`gho_zgyvmbb...`) в GitHub Settings
 >
 > **На следующий запуск Claude:**
-> 1. Прочитай [`docs/plans/2026-05-10-vsevolod-restructure-design.md`](docs/plans/2026-05-10-vsevolod-restructure-design.md) сверху вниз — там вся актуальная картина.
-> 2. Загляни в [`docs/plans/_archive/2026-05-05-monorepo-migration.md`](docs/plans/_archive/2026-05-05-monorepo-migration.md) — детальный 24-task план миграции с Vite-конфигом и cross-repo deploy strategy. Не выкидывать, использовать как референс при имплементации.
-> 3. Получи у Олега ответы на open questions (см. конец design-doc'а).
-> 4. Только потом вызывай `superpowers:writing-plans`.
+> - Если задача о Green Reports / шаблонах → работай в `/Users/oleg/Dev/vsevolod/sfg-reports/`
+> - Если задача о дашборде → этот репо (`!sfg-dashboard!/`)
+> - Документация workflow для нового клиента: `sfg-reports/docs/how-to-add-client.md`
+> - Архивный план миграции (5 мая) теперь помечен SUPERSEDED — не выполнять, читать только как историю архитектурных решений.
 
 ---
 
@@ -24,17 +34,17 @@
 
 ---
 
-## Активные локальные превью (порты 4200-4206)
+## Локальные dev-команды
 
-| Порт | Проект | Откуда |
+| Проект | Папка | Команда |
 |---|---|---|
-| 4200 | sfg-dashboard | этот HTML |
-| 4201 | w360-pdf-reports | `Watch360 PDF Reports/dist/` |
-| 4202 | w360-linkedin-pdf | `Watch360_LinkedIn_PDF_animations_remotion/report-pdf/dist/` |
-| 4203 | figma-to-ppt | `Figma_To_PPT/` (Next.js dev) |
-| 4204 | m360-jewelry-weekly-pulse | `M360-jewelry-weekly-pulse/dist/` |
-| 4205 | m360-signal-selector | `Market360_Signal_Selector/out/` |
-| 4206 | wwg-2026-novelties-redesign | `WWG 2026 Novelties Page Redesign/prototype/dist/` |
+| sfg-dashboard (этот) | `!sfg-dashboard!/` | `python3 -m http.server 4200` |
+| Templates catalog (новый монорепо) | `sfg-reports/` | `npm run dev:templates` |
+| Watch Media (frozen) | `reports/green-reports/watch-media/` | `npm run dev` |
+| Sachet weekly-pulse (frozen) | `reports/green-reports/weekly-pulse/sachet/` | `npm run dev` |
+| LinkedIn PDF | `reports/linkedin-remotion/report-pdf/` | `npm run dev` |
+| M360 Signal Selector | `prototypes/m360-signal-selector/` | `npm run dev` |
+| WWG Novelties | `prototypes/wwg-2026-novelties-redesign/` | `npm run dev` |
 
 ---
 
@@ -104,24 +114,20 @@ main
 
 ---
 
-## Проекты на GitHub Pages (секция LIVE)
+## Карточки дашборда (текущее состояние)
 
-| Карточка | URL | Обложка |
-|---|---|---|
-| WWG 2026 Novelties Redesign | https://chife-mod.github.io/wwg-2026-novelties-redesign/ | `wwg-novelties.png` |
-| Watch360 LinkedIn PDF | https://chife-mod.github.io/watch360-linkedin-pdf/ | `watch360-linkedin-pdf.png` |
-| Watch360 PDF Reports | https://chife-mod.github.io/watch360-pdf-reports/ | `watch360-pdf-reports.png` |
-| Market360 Signal Selector | https://chife-mod.github.io/Market360_Signal_Selector/ | `market360-signal-selector.jpg` |
-| Support Icon | https://chife-mod.github.io/support-icon/ | `support-icon.png` |
+Дашборд двухуровневый: главный экран → 5 категорий → подэкран с фильтрами.
 
-## Проекты локальные (секция IN PROGRESS)
+| Категория | Карточки |
+|---|---|
+| Green Reports | Templates (sfg-templates-viewer) · Watch Media · Weekly Pulse · Sachet |
+| LinkedIn Remotion | Templates (placeholder) · LinkedIn PDF · Remotion Video |
+| Prototypes | WWG Novelties · M360 Signal Selector · BSCC · Manu.ai · SF Product Matching |
+| Tools | *(пусто)* |
+| Misc | Market360 Google Sheets |
 
-| Карточка | Путь | Обложка |
-|---|---|---|
-| SlideForge | `.../SlideForge/` | `slideforge.png` |
-| Logo Parser | `.../Logo Parser/` | `logo-parser.png` |
-| Market360 Google Sheets | `.../Market360_Sheets/` | `market360-sheets.png` |
-| *(пустая карточка)* | — | — |
+Каждая карточка имеет `data-customer/type/platform/brand` — для фильтров +
+автоматически рендерятся chip-теги внизу карточки (через JS в этом же файле).
 
 ---
 
@@ -162,13 +168,13 @@ JPEG сохранять как `.jpg`, PNG как `.png`. Обновить `<img
 ## Деплой
 
 ```bash
-cd "/Users/oleg/My Drive/Dev/Project/Vsevolod/!SF Projects Dashboard!"
+cd /Users/oleg/Dev/vsevolod/\!sfg-dashboard\!
 git add <файлы>
 git commit -m "описание"
 git push origin main
 ```
 
-GitHub Pages обновляется через ~1 минуту после push.
+GitHub Pages обновляется через ~1 минуту после push (deploy из ветки main).
 
 ---
 
@@ -205,9 +211,8 @@ npx gh-pages -d out --repo https://github.com/chife-mod/Market360_Signal_Selecto
 
 ## Локальный запуск превью
 
-Сервер запускается через `.claude/launch.json` или вручную:
 ```bash
-cd "/Users/oleg/My Drive/Dev/Project/Vsevolod/!SF Projects Dashboard!"
+cd /Users/oleg/Dev/vsevolod/\!sfg-dashboard\!
 python3 -m http.server 4200
 # → http://localhost:4200
 ```

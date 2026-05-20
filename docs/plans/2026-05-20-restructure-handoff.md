@@ -80,68 +80,86 @@ https://chife-mod.github.io/wwg-2026-novelties-redesign/    ← WWG Novelties
 
 ---
 
-## ⏳ Что осталось (для следующей сессии)
+## ✅ Update — 2026-05-20 vespere
 
-### Блокировано — требует одно действие от Олега
+Большая часть пунктов закрыта. Текущее состояние:
 
-Олег должен запустить в терминале:
+| Действие | Статус |
+|---|---|
+| Rename `sf-ui-apm` → `sf-ui-product-matching` | ✅ done (GitHub + local remote + dashboard карточка) |
+| Монорепо для green-reports | ✅ done — `chife-mod/sfg-reports` (см. ниже) |
+| TemplatesPage переезд из Watch Media | ✅ done — собственный артефакт `chife-mod/sfg-templates-viewer` |
+| Все Sachet и Watch Media шаблоны в shared-каталоге | ✅ done — 24 layouts в `sfg-reports/shared/slides/` |
+| Card covers Watch Media + Weekly Pulse | ✅ done — webp q=78, 17/18 KB |
+| Удалить 3 GitHub репо (Tina_Karol_PPT, support-icon, Logo-Parser) | ⏳ ждёт `gh auth refresh -h github.com -s delete_repo` |
+| Отзыв leaked PAT (`gho_zgyvmbb...`) в GitHub Settings | ⏳ ручное действие в GitHub UI |
+| PAT_DEPLOY secret для авто-деплоя Templates | ⏳ Олег создаёт fine-grained PAT с правами Contents:rw на `sfg-templates-viewer` |
+| Internal vs Client view (`?view=client`) | ⏳ не делалось, отдельная задача |
+| Watch Media и Sachet физически в монорепо | ⏳ намеренно отложено — incremental migration |
+
+## 🆕 Что появилось — монорепо `chife-mod/sfg-reports` (private)
+
+Принят **incremental migration** подход:
+- Существующие Watch Media и Sachet отчёты **остаются в своих репо** (frozen — Sachet уже у клиента).
+- Новый монорепо `sfg-reports` содержит:
+  - `shared/` — single source of truth: 24 slide-компонента, ui, theme, data, assets
+  - `apps/templates/` — отдельный Templates catalog viewer, деплоится на `chife-mod/sfg-templates-viewer`
+  - `products/weekly-pulse/_template/` — скелет для нового клиента (Vulkan и т.п.)
+  - `docs/how-to-add-client.md` + `docs/how-to-version-slide.md`
+  - `.github/workflows/deploy-templates.yml` — auto-deploy при наличии PAT_DEPLOY
+
+**Live URLs (все 200):**
+- https://chife-mod.github.io/sfg-templates-viewer/ — общий Templates catalog
+- https://chife-mod.github.io/sfg-dashboard/ — двухуровневый дашборд
+- https://chife-mod.github.io/Watch360-PDF-Reports/ — frozen Watch Media
+- https://chife-mod.github.io/M360-jewelry-weekly-pulse/ — frozen Sachet
+
+**Архитектурные правила** (в `sfg-reports/docs/`):
+- Косметика и optional props → правишь `shared/slides/X.tsx` in-place
+- Variants → пропс `variant: 'a' | 'b'`
+- Breaking change → файл-сосед `shared/slides/X.v2.tsx`; старые отчёты импортят v1
+- Новый layout создаётся **сразу в `shared/slides/`**, не в клиентской папке
+- Клиент-специфичное (logos, data) → `products/<type>/<client>/public/` и `src/data/`
+
+**Workflow «новый клиент» (5 шагов, ~15 мин):**
+1. `cp -r products/weekly-pulse/_template products/weekly-pulse/<client-slug>`
+2. Replace data + public/logo.svg + REPORT_META
+3. Add mode в `vite.config.ts` + scripts в `package.json`
+4. `gh repo create chife-mod/sf-<client>-weekly-pulse --public` + добавить job в workflow
+5. Зарегистрировать карточку на дашборде + option в Customer filter
+
+## ⏳ Что осталось — Олег делает в UI / терминале
+
+### 1. Auto-deploy Templates (5 мин)
+```bash
+# https://github.com/settings/personal-access-tokens/new
+# Repository access: chife-mod/sfg-templates-viewer
+# Repository permissions → Contents: Read and write
+gh secret set PAT_DEPLOY --repo chife-mod/sfg-reports
+```
+До этого deploy Templates ручной:
+```bash
+cd /Users/oleg/Dev/vsevolod/sfg-reports
+npm run build:templates && npx gh-pages -d dist/templates \
+  --repo https://github.com/chife-mod/sfg-templates-viewer.git
+```
+
+### 2. Удаление 3 устаревших репо
 ```bash
 gh auth refresh -h github.com -s delete_repo
+# затем агент сам выполнит:
+gh repo delete chife-mod/Tina_Karol_PPT --yes
+gh repo delete chife-mod/support-icon --yes
+gh repo delete chife-mod/Logo-Parser --yes
 ```
-(откроется браузер → подтверждение)
 
-После этого ты, новый агент, выполняешь:
+### 3. Отзыв leaked PAT
+GitHub Settings → Developer settings → Personal access tokens → найти `gho_zgyvmbb...` → Revoke.
 
-1. **Удалить 3 репо** (GitHub Pages удаляются автоматически вместе с репо):
-   ```bash
-   gh repo delete chife-mod/Tina_Karol_PPT --yes   # Figma_To_PPT удалён локально пользователем 2026-05-20
-   gh repo delete chife-mod/support-icon --yes
-   gh repo delete chife-mod/Logo-Parser --yes
-   ```
+## Отложено (не в текущем scope)
 
-2. **Переименовать репо** `sf-ui-apm` → `sf-ui-product-matching`:
-   ```bash
-   gh repo rename sf-ui-product-matching --repo chife-mod/sf-ui-apm --yes
-   cd /Users/oleg/Dev/vsevolod/prototypes/sf-ui-product-matching
-   git remote set-url origin https://github.com/chife-mod/sf-ui-product-matching.git
-   ```
-   После этого обнови в дашборде `!sfg-dashboard!/index.html` карточку SF UI Product Matching: убрать пометку «(будет переименован)» и поменять GitHub link.
-
-### Блокировано — действие от Олега в GitHub UI
-
-3. **Отзыв leaked PAT** в GitHub Settings → Developer settings → Personal access tokens → найти токен начинающийся на `gho_zgyvmbb...` и Revoke. Действие сугубо человеческое, агент не может выполнить.
-
-### Не блокировано — большая работа, отдельная сессия
-
-4. **Монорепо `sf-reports`** (слияние `Watch Media` + `Sachet weekly-pulse` в один git-репо):
-
-   План подробный лежит в [`!sfg-dashboard!/docs/plans/_archive/2026-05-05-monorepo-migration.md`](!sfg-dashboard!/docs/plans/_archive/2026-05-05-monorepo-migration.md) (24 task'а, ~день работы).
-
-   Кратко:
-   - `gh repo create chife-mod/sf-reports --private`
-   - Скопировать `package.json`, `tsconfig*`, `tailwind.config.ts`, `vite.config.ts` из M360 (он новее) как baseline
-   - Извлечь общие слайды из обоих репо в `reports/green-reports/!templates!/approved/` (Cover, Overview, Table, Models, Keyword, Quote, Map — каталог из TemplatesPage)
-   - Извлечь `sandbox.tsx` отчёт из Watch360-PDF-Reports в `!templates!/sandbox/`
-   - Переместить отчёты с импортами через `@templates/...`:
-     - Watch Media отчёты → `green-reports/watch-media/{feb-2026,...}/`
-     - Sachet weekly-pulse → `green-reports/weekly-pulse/sachet/{apr-20-26,...}/`
-   - Vite multi-entry config: 3 entry (watch-media, sachet, templates)
-   - GitHub Actions `.github/workflows/deploy.yml` с `peaceiris/actions-gh-pages` + `external_repository`:
-     - Build watch-media → push в `chife-mod/Watch360-PDF-Reports@gh-pages`
-     - Build sachet → push в `chife-mod/M360-jewelry-weekly-pulse@gh-pages`
-   - PAT_DEPLOY secret (Олег создаёт fine-grained PAT с правами `repo` на оба deploy-target репо)
-   - Старые папки `reports/green-reports/watch-media/` и `reports/green-reports/weekly-pulse/sachet/` (с их `.git`) удалить — контент переедет в монорепо
-   - Старые репо `Watch360-PDF-Reports` и `M360-jewelry-weekly-pulse` на GitHub остаются как **deploy-targets**, в их README прописать «source moved to chife-mod/sf-reports»
-
-   **Red-line:** `https://chife-mod.github.io/Watch360-PDF-Reports/` и `https://chife-mod.github.io/M360-jewelry-weekly-pulse/` НЕ должны измениться ни на секунду (ссылки могли уйти клиентам).
-
-5. **Internal vs Client view** (после монорепо):
-   - Один бандл, query-param `?view=client` скрывает toolbar/dropdown/ссылки наружу
-   - Дашборд: на каждой плитке отчёта две ссылки — internal preview + копия client-URL
-   - Текущая реализация в Toolbar (Watch360-PDF-Reports/src/app/Toolbar.tsx) — переключатель `dropdown + Export PDF` остаётся, добавляется условие скрытия при `?view=client`
-
-6. **TemplatesPage переехать в `!templates!/`** (часть монорепо):
-   - Сейчас `Watch360-PDF-Reports/src/app/TemplatesPage.tsx` обслуживает только Watch Media. После монорепо переезжает в `green-reports/!templates!/TemplatesPage.tsx` как общий viewer (для watch-media + weekly-pulse/sachet).
+- **Internal vs Client view** (`?view=client` для скрытия toolbar/dropdown в client-shared URL)
+- **Migrating frozen reports в монорепо** — Watch Media feb-2026 и Sachet apr-20-26 остаются в своих репо. Каждый **новый** выпуск пишется в `sfg-reports/products/<type>/<client>/`. Старые мигрировать когда понадобится их обновлять.
 
 ---
 
