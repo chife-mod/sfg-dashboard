@@ -283,6 +283,7 @@
 
     /* ─── Card (на под-экранах) ─── */
     .card {
+      position: relative;                /* anchor для stretched-link overlay */
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -292,23 +293,23 @@
       text-decoration: none;
       color: inherit;
       transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-      cursor: pointer;
       backdrop-filter: blur(10px);
     }
 
-    .card:hover {
+    /* Невидимый overlay-anchor, ловит клик по всей карточке.
+       Внутренние ссылки (card-info-link) имеют z-index выше — кликаются отдельно. */
+    .card-link {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .card:has(.card-link):hover {
       border-color: var(--border-hover);
       background: var(--surface-hover);
       transform: translateY(-2px);
-    }
-
-    .card.no-link {
-      cursor: default;
-    }
-
-    .card.no-link:hover {
-      transform: none;
-      border-color: var(--border);
     }
 
     .card.hidden {
@@ -469,6 +470,8 @@
     }
 
     .card-info a {
+      position: relative;          /* подняться над .card-link overlay */
+      z-index: 2;
       color: var(--text-secondary);
       text-decoration: none;
       transition: color 0.15s ease;
@@ -627,8 +630,8 @@
           <label>Customer</label>
           <select data-filter="customer">
             <option value="">All</option>
+            <option value="__sf-internal__">SF-internal</option>
             <option value="sachet">sachet</option>
-            <option value="">— SF-internal</option>
           </select>
         </div>
         <div class="filter-group">
@@ -659,9 +662,11 @@
 
       <div class="grid">
         <!-- Templates — всегда первая, вне фильтров -->
-        <a class="card templates-card"
-           href="https://chife-mod.github.io/Watch360-PDF-Reports/?report=legacy-templates"
-           target="_blank" rel="noopener">
+        <div class="card templates-card">
+          <a class="card-link"
+             href="https://chife-mod.github.io/Watch360-PDF-Reports/?report=legacy-templates"
+             target="_blank" rel="noopener"
+             aria-label="Templates · Green Reports"></a>
           <div class="card-cover">
             <div class="card-cover-placeholder">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -689,13 +694,15 @@
               </div>
             </div>
           </div>
-        </a>
+        </div>
 
         <!-- Watch Media -->
-        <a class="card"
-           href="https://chife-mod.github.io/Watch360-PDF-Reports/"
-           target="_blank" rel="noopener"
-           data-customer="" data-type="watch-media" data-platform="watch360" data-brand="watch360">
+        <div class="card"
+             data-customer="__sf-internal__" data-type="watch-media" data-platform="watch360" data-brand="watch360">
+          <a class="card-link"
+             href="https://chife-mod.github.io/Watch360-PDF-Reports/"
+             target="_blank" rel="noopener"
+             aria-label="Watch Media · Feb 2026"></a>
           <div class="card-cover">
             <img src="assets/covers/watch360-pdf-reports.png" alt="Watch Media" loading="lazy" />
           </div>
@@ -721,13 +728,15 @@
               </div>
             </div>
           </div>
-        </a>
+        </div>
 
-        <!-- Weekly Pulse · Sacet -->
-        <a class="card"
-           href="https://chife-mod.github.io/M360-jewelry-weekly-pulse/"
-           target="_blank" rel="noopener"
-           data-customer="sachet" data-type="weekly-pulse" data-platform="market360" data-brand="semanticforce">
+        <!-- Weekly Pulse · Sachet -->
+        <div class="card"
+             data-customer="sachet" data-type="weekly-pulse" data-platform="market360" data-brand="semanticforce">
+          <a class="card-link"
+             href="https://chife-mod.github.io/M360-jewelry-weekly-pulse/"
+             target="_blank" rel="noopener"
+             aria-label="Weekly Pulse · Sachet"></a>
           <div class="card-cover">
             <div class="card-cover-placeholder" style="background:#1a3a2e">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -739,9 +748,9 @@
           <div class="card-body">
             <div class="card-top">
               <div class="badge badge-live">LIVE</div>
-              <div class="card-name">Weekly Pulse · Sacet</div>
+              <div class="card-name">Weekly Pulse · Sachet</div>
             </div>
-            <p class="card-desc">Еженедельный SoMe Insights для Sacet — финальный 11-слайдный отчёт с demand-detail heatmap. Brand: SemanticForce, Platform: Market360.</p>
+            <p class="card-desc">Еженедельный SoMe Insights для Sachet — финальный 11-слайдный отчёт с demand-detail heatmap. Brand: SemanticForce, Platform: Market360.</p>
             <div class="card-info">
               <div class="card-info-tags">
                 <span class="info-tag">customer:sachet</span>
@@ -759,7 +768,7 @@
               </div>
             </div>
           </div>
-        </a>
+        </div>
       </div>
     </section>
 
@@ -775,7 +784,7 @@
       <p class="section-sub">Вертикальные PDF + Remotion видео — для LinkedIn Novelties carousel.</p>
 
       <div class="grid">
-        <a class="card templates-card no-link">
+        <div class="card templates-card">
           <div class="card-cover">
             <div class="card-cover-placeholder">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -799,11 +808,13 @@
               </div>
             </div>
           </div>
-        </a>
+        </div>
 
-        <a class="card"
-           href="https://chife-mod.github.io/watch360-linkedin-pdf/"
-           target="_blank" rel="noopener">
+        <div class="card">
+          <a class="card-link"
+             href="https://chife-mod.github.io/watch360-linkedin-pdf/"
+             target="_blank" rel="noopener"
+             aria-label="LinkedIn PDF"></a>
           <div class="card-cover">
             <img src="assets/covers/watch360-linkedin-pdf.png" alt="LinkedIn PDF" loading="lazy" />
           </div>
@@ -824,11 +835,13 @@
               </div>
             </div>
           </div>
-        </a>
+        </div>
 
-        <a class="card"
-           href="https://github.com/chife-mod/watch360-remotion"
-           target="_blank" rel="noopener">
+        <div class="card">
+          <a class="card-link"
+             href="https://github.com/chife-mod/watch360-remotion"
+             target="_blank" rel="noopener"
+             aria-label="Remotion Video"></a>
           <div class="card-cover">
             <div class="card-cover-placeholder">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -854,7 +867,7 @@
               </div>
             </div>
           </div>
-        </a>
+        </div>
       </div>
     </section>
 
@@ -871,9 +884,11 @@
 
       <div class="grid">
 
-        <a class="card"
-           href="https://chife-mod.github.io/wwg-2026-novelties-redesign/"
-           target="_blank" rel="noopener">
+        <div class="card">
+          <a class="card-link"
+             href="https://chife-mod.github.io/wwg-2026-novelties-redesign/"
+             target="_blank" rel="noopener"
+             aria-label="WWG 2026 Novelties Redesign"></a>
           <div class="card-cover">
             <img src="assets/covers/wwg-novelties.png" alt="WWG 2026 Novelties" loading="lazy" />
           </div>
@@ -894,11 +909,13 @@
               </div>
             </div>
           </div>
-        </a>
+        </div>
 
-        <a class="card"
-           href="https://chife-mod.github.io/Market360_Signal_Selector/"
-           target="_blank" rel="noopener">
+        <div class="card">
+          <a class="card-link"
+             href="https://chife-mod.github.io/Market360_Signal_Selector/"
+             target="_blank" rel="noopener"
+             aria-label="Market360 Signal Selector"></a>
           <div class="card-cover">
             <img src="assets/covers/market360-signal-selector.jpg" alt="Market360 Signal Selector" loading="lazy" />
           </div>
@@ -919,11 +936,13 @@
               </div>
             </div>
           </div>
-        </a>
+        </div>
 
-        <a class="card"
-           href="https://github.com/chife-mod/business-school-command-center"
-           target="_blank" rel="noopener">
+        <div class="card">
+          <a class="card-link"
+             href="https://github.com/chife-mod/business-school-command-center"
+             target="_blank" rel="noopener"
+             aria-label="Business School Command Center"></a>
           <div class="card-cover">
             <div class="card-cover-placeholder" style="background:#13131C">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -950,11 +969,13 @@
               </div>
             </div>
           </div>
-        </a>
+        </div>
 
-        <a class="card"
-           href="https://github.com/chife-mod/manu-ai"
-           target="_blank" rel="noopener">
+        <div class="card">
+          <a class="card-link"
+             href="https://github.com/chife-mod/manu-ai"
+             target="_blank" rel="noopener"
+             aria-label="Manu.ai"></a>
           <div class="card-cover">
             <div class="card-cover-placeholder" style="background:#0F0F0F">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -981,11 +1002,13 @@
               </div>
             </div>
           </div>
-        </a>
+        </div>
 
-        <a class="card"
-           href="https://github.com/chife-mod/sf-ui-apm"
-           target="_blank" rel="noopener">
+        <div class="card">
+          <a class="card-link"
+             href="https://github.com/chife-mod/sf-ui-apm"
+             target="_blank" rel="noopener"
+             aria-label="SF Product Matching"></a>
           <div class="card-cover">
             <div class="card-cover-placeholder" style="background:#0F0F0F">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -1013,7 +1036,7 @@
               </div>
             </div>
           </div>
-        </a>
+        </div>
 
       </div>
     </section>
