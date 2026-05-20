@@ -12,9 +12,10 @@
 > остаются как snapshot. Live URLs не сломаны.
 >
 > **Что осталось — ручные действия Олега** (см. [`docs/plans/2026-05-20-restructure-handoff.md`](docs/plans/2026-05-20-restructure-handoff.md) секция "Что осталось"):
-> 1. Создать PAT_DEPLOY secret в `sfg-reports` (5 мин) — для auto-deploy Templates
-> 2. `gh auth refresh -h github.com -s delete_repo` → удалить 3 устаревших репо
-> 3. Отозвать leaked PAT (`gho_zgyvmbb...`) в GitHub Settings
+> 1. `gh auth refresh -h github.com -s delete_repo` → удалить 3 устаревших репо (их Pages уже 404)
+> 2. Отозвать leaked PAT (`gho_zgyvmbb...`) в GitHub Settings
+>
+> Auto-deploy Templates уже работает (SSH deploy key настроен).
 >
 > **На следующий запуск Claude:**
 > - Если задача о Green Reports / шаблонах → работай в `/Users/oleg/Dev/vsevolod/sfg-reports/`

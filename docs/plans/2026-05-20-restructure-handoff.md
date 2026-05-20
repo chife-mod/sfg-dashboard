@@ -93,7 +93,7 @@ https://chife-mod.github.io/wwg-2026-novelties-redesign/    ← WWG Novelties
 | Card covers Watch Media + Weekly Pulse | ✅ done — webp q=78, 17/18 KB |
 | Удалить 3 GitHub репо (Tina_Karol_PPT, support-icon, Logo-Parser) | ⏳ ждёт `gh auth refresh -h github.com -s delete_repo` |
 | Отзыв leaked PAT (`gho_zgyvmbb...`) в GitHub Settings | ⏳ ручное действие в GitHub UI |
-| PAT_DEPLOY secret для авто-деплоя Templates | ⏳ Олег создаёт fine-grained PAT с правами Contents:rw на `sfg-templates-viewer` |
+| Auto-deploy Templates через GitHub Actions | ✅ настроен через SSH deploy key (ACTIONS_DEPLOY_KEY в sfg-reports + matching public key как deploy key на sfg-templates-viewer) |
 | Internal vs Client view (`?view=client`) | ⏳ не делалось, отдельная задача |
 | Watch Media и Sachet физически в монорепо | ⏳ намеренно отложено — incremental migration |
 
@@ -130,31 +130,20 @@ https://chife-mod.github.io/wwg-2026-novelties-redesign/    ← WWG Novelties
 
 ## ⏳ Что осталось — Олег делает в UI / терминале
 
-### 1. Auto-deploy Templates (5 мин)
-```bash
-# https://github.com/settings/personal-access-tokens/new
-# Repository access: chife-mod/sfg-templates-viewer
-# Repository permissions → Contents: Read and write
-gh secret set PAT_DEPLOY --repo chife-mod/sfg-reports
-```
-До этого deploy Templates ручной:
-```bash
-cd /Users/oleg/Dev/vsevolod/sfg-reports
-npm run build:templates && npx gh-pages -d dist/templates \
-  --repo https://github.com/chife-mod/sfg-templates-viewer.git
-```
-
-### 2. Удаление 3 устаревших репо
+### 1. Удаление 3 устаревших репо
 ```bash
 gh auth refresh -h github.com -s delete_repo
-# затем агент сам выполнит:
+# затем агент в одну команду:
 gh repo delete chife-mod/Tina_Karol_PPT --yes
 gh repo delete chife-mod/support-icon --yes
 gh repo delete chife-mod/Logo-Parser --yes
 ```
+GH Pages у всех трёх уже отключены (404 на всех URL).
 
-### 3. Отзыв leaked PAT
+### 2. Отзыв leaked PAT
 GitHub Settings → Developer settings → Personal access tokens → найти `gho_zgyvmbb...` → Revoke.
+
+Это **единственное** что осталось не закрыто, и оба пункта требуют твоего действия.
 
 ## Отложено (не в текущем scope)
 
