@@ -11,11 +11,7 @@
 > incremental migration: новые выпуски будут писаться в монорепо, старые
 > остаются как snapshot. Live URLs не сломаны.
 >
-> **Что осталось — ручные действия Олега** (см. [`docs/plans/2026-05-20-restructure-handoff.md`](docs/plans/2026-05-20-restructure-handoff.md) секция "Что осталось"):
-> 1. `gh auth refresh -h github.com -s delete_repo` → удалить 3 устаревших репо (их Pages уже 404)
-> 2. Отозвать leaked PAT (`gho_zgyvmbb...`) в GitHub Settings
->
-> Auto-deploy Templates уже работает (SSH deploy key настроен).
+> **Restructure полностью закрыт.** Auto-deploy Templates работает (SSH deploy key). 3 устаревших репо удалены. Leaked PAT не требовал revoke — он жил только в локальном `.git/config`, в публичную историю не попадал.
 >
 > **На следующий запуск Claude:**
 > - Если задача о Green Reports / шаблонах → работай в `/Users/oleg/Dev/vsevolod/sfg-reports/`

@@ -52,7 +52,7 @@
 |---|---|
 | Backup | `/Users/oleg/MEGA/Vsevolod/vsevolod-backup-2026-05-20.tar.gz` (2.5 GB, без node_modules/dist). Синхронизируется в MEGA cloud — off-site копия. |
 | `git push` M360 | коммит `f65924f deploy: rebalanced demand-detail columns` — финал heatmap для Sachet weekly-pulse |
-| Очистка leaked PAT | `git remote set-url origin https://github.com/chife-mod/watch360-linkedin-pdf.git` в `reports/linkedin-remotion/report-pdf/.git/config` (был `gho_zgyvmbb...@github.com/...`) |
+| Очистка leaked PAT | `git remote set-url origin https://github.com/chife-mod/watch360-linkedin-pdf.git` в `reports/linkedin-remotion/report-pdf/.git/config` (был `[expired token]@github.com/...`) |
 | Удаление legacy Sachet из Watch360-PDF-Reports | удалён `src/reports/weekly-pulse-draft.tsx` + убран из `src/reports/index.ts` (был DRAFT-snapshot 9 слайдов, финал лежит в M360 — 11 слайдов с heatmap). Изменения не закоммичены — см. ниже. |
 | Cross-refs в manu-ai | `sf-ui-apm/` → `sf-ui-product-matching/` в `prototypes/manu-ai/{CLAUDE.md, PLAN.md, LOG.md, docs/BRIEF.md}`. Изменения не закоммичены (Олег обычно сам коммитит свою активную работу). |
 | Дашборд переписан | `!sfg-dashboard!/index.html` — два коммита: `cefaee0` (rewrite) + `bb15ae1` (rename → sf-ui-product-matching). Оба запушены в `chife-mod/sfg-dashboard`. Live: https://chife-mod.github.io/sfg-dashboard/ |
@@ -91,8 +91,8 @@ https://chife-mod.github.io/wwg-2026-novelties-redesign/    ← WWG Novelties
 | TemplatesPage переезд из Watch Media | ✅ done — собственный артефакт `chife-mod/sfg-templates-viewer` |
 | Все Sachet и Watch Media шаблоны в shared-каталоге | ✅ done — 24 layouts в `sfg-reports/shared/slides/` |
 | Card covers Watch Media + Weekly Pulse | ✅ done — webp q=78, 17/18 KB |
-| Удалить 3 GitHub репо (Tina_Karol_PPT, support-icon, Logo-Parser) | ⏳ ждёт `gh auth refresh -h github.com -s delete_repo` |
-| Отзыв leaked PAT (`gho_zgyvmbb...`) в GitHub Settings | ⏳ ручное действие в GitHub UI |
+| Удалить 3 GitHub репо (Tina_Karol_PPT, support-icon, Logo-Parser) | ✅ done — все три удалены 2026-05-20 |
+| Leaked PAT | ✅ closed-out — токен жил только в локальном `.git/config` (не tracked, не в commit history), уже вычищен через `git remote set-url`. Префикс-маркер из docs тоже убран. Revoke не делали — нечего revoke'ить в публике |
 | Auto-deploy Templates через GitHub Actions | ✅ настроен через SSH deploy key (ACTIONS_DEPLOY_KEY в sfg-reports + matching public key как deploy key на sfg-templates-viewer) |
 | Internal vs Client view (`?view=client`) | ⏳ не делалось, отдельная задача |
 | Watch Media и Sachet физически в монорепо | ⏳ намеренно отложено — incremental migration |
@@ -128,22 +128,9 @@ https://chife-mod.github.io/wwg-2026-novelties-redesign/    ← WWG Novelties
 4. `gh repo create chife-mod/sf-<client>-weekly-pulse --public` + добавить job в workflow
 5. Зарегистрировать карточку на дашборде + option в Customer filter
 
-## ⏳ Что осталось — Олег делает в UI / терминале
+## ✅ Restructure закрыт
 
-### 1. Удаление 3 устаревших репо
-```bash
-gh auth refresh -h github.com -s delete_repo
-# затем агент в одну команду:
-gh repo delete chife-mod/Tina_Karol_PPT --yes
-gh repo delete chife-mod/support-icon --yes
-gh repo delete chife-mod/Logo-Parser --yes
-```
-GH Pages у всех трёх уже отключены (404 на всех URL).
-
-### 2. Отзыв leaked PAT
-GitHub Settings → Developer settings → Personal access tokens → найти `gho_zgyvmbb...` → Revoke.
-
-Это **единственное** что осталось не закрыто, и оба пункта требуют твоего действия.
+Все блокирующие пункты закрыты. Что осталось — намеренные отложенные задачи (см. таблицу выше): Internal vs Client view, миграция frozen reports в монорепо. Делаем по запросу, не прямо сейчас.
 
 ## Отложено (не в текущем scope)
 
