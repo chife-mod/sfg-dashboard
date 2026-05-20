@@ -51,6 +51,7 @@
       gap: 4px;
       text-decoration: none;
       flex-shrink: 0;
+      cursor: pointer;
     }
 
     .logo-pill {
@@ -101,74 +102,123 @@
       font-weight: 400;
     }
 
-    /* ─── Main ─── */
+    /* ─── Main / screens ─── */
     main {
       max-width: 1320px;
       margin: 0 auto;
       padding: 36px 48px 0;
     }
 
-    /* ─── Section ─── */
-    .section {
-      margin-bottom: 48px;
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* ─── Hero ─── */
+    .hero {
+      margin-bottom: 32px;
     }
 
-    .section-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .section-header-left {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .section-indicator {
+    .hero-label {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
     }
 
-    .section-dot {
+    .hero-label-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      flex-shrink: 0;
+      background: var(--accent);
     }
 
-    .section-dot.live { background: #22c55e; box-shadow: 0 0 6px rgba(34, 197, 94, 0.7); }
-    .section-dot.local { background: rgba(255,255,255,0.3); }
-
-    .section-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .section-title {
-      font-size: 28px;
+    .hero-title {
+      font-size: 42px;
       font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
       color: var(--text-primary);
-      letter-spacing: -0.02em;
-      line-height: 1;
+      margin-bottom: 10px;
     }
 
-    .section-count {
-      font-size: 12px;
-      font-weight: 400;
+    .hero-title span { color: var(--accent); }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.6;
+    }
+
+    /* ─── Breadcrumb (на под-экранах) ─── */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
       color: var(--text-muted);
-      padding-bottom: 4px;
+      margin-bottom: 20px;
     }
 
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin-bottom: 32px;
+    .breadcrumb a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--accent);
+    }
+
+    .breadcrumb-sep {
+      color: var(--text-muted);
+    }
+
+    /* ─── Filters ─── */
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .filter-group label {
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 10px;
+    }
+
+    .filter-group select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .filter-group select:focus {
+      outline: none;
+      border-color: var(--border-hover);
     }
 
     /* ─── Grid ─── */
@@ -178,7 +228,60 @@
       gap: 20px;
     }
 
-    /* ─── Card ─── */
+    /* ─── Category tile (главный экран) ─── */
+    .category-tile {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      min-height: 200px;
+    }
+
+    .category-tile:hover {
+      border-color: var(--border-hover);
+      background: var(--surface-hover);
+      transform: translateY(-2px);
+    }
+
+    .category-tile-name {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+    }
+
+    .category-tile-name span { color: var(--accent); }
+
+    .category-tile-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .category-tile-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .category-tile-count {
+      font-weight: 500;
+    }
+
+    /* ─── Card (на под-экранах) ─── */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -208,6 +311,14 @@
       border-color: var(--border);
     }
 
+    .card.hidden {
+      display: none;
+    }
+
+    .card.templates-card {
+      border-color: rgba(0, 195, 217, 0.18);
+    }
+
     /* ─── Cover ─── */
     .card-cover {
       width: 100%;
@@ -227,6 +338,14 @@
 
     .card:hover .card-cover img {
       transform: scale(1.03);
+    }
+
+    .card-cover-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* ─── Body ─── */
@@ -296,19 +415,16 @@
       background: rgba(255,255,255,0.3);
     }
 
+    .badge-accent {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid rgba(0, 195, 217, 0.25);
+    }
+
     .card-desc {
       font-size: 13px;
       color: var(--text-secondary);
       line-height: 1.55;
-    }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-      margin-top: auto;
     }
 
     .card-tags {
@@ -327,73 +443,94 @@
       border: 1px solid rgba(255,255,255,0.06);
     }
 
-    .card-arrow {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      border: 1px solid rgba(0, 195, 217, 0.3);
+    /* ─── Info footer (GitHub link + local path) ─── */
+    .card-info {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .card:hover .card-arrow {
-      opacity: 1;
-    }
-
-    .card-arrow svg {
-      color: var(--accent);
-    }
-
-    .card.no-link .card-arrow { display: none; }
-
-    /* ─── Hero ─── */
-    .hero {
-      padding: 36px 48px 0;
-      max-width: 1320px;
-      margin: 0 auto;
-    }
-
-    .hero-label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 500;
+      flex-direction: column;
+      gap: 6px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+      font-size: 11px;
       color: var(--text-muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
     }
 
-    .hero-label-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
+    .card-info-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow: hidden;
     }
 
-    .hero-title {
-      font-size: 42px;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      color: var(--text-primary);
-      margin-bottom: 10px;
+    .card-info-icon {
+      flex-shrink: 0;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    .card-info a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      overflow: hidden;
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .hero-title span { color: var(--accent); }
+    .card-info a:hover {
+      color: var(--accent);
+    }
 
-    .hero-sub {
-      font-size: 15px;
+    .card-info-path {
+      color: var(--text-muted);
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+      font-size: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .card-info-tags {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .info-tag {
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 1px 6px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.03);
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+    }
+
+    /* ─── Section header ─── */
+    .section-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .section-sub {
+      font-size: 13px;
       color: var(--text-secondary);
-      max-width: 520px;
-      line-height: 1.6;
-      margin-bottom: 48px;
+      margin-bottom: 20px;
+    }
+
+    /* ─── Empty state ─── */
+    .empty {
+      grid-column: 1 / -1;
+      padding: 48px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
     }
 
   </style>
@@ -401,7 +538,7 @@
 <body>
 
   <header>
-    <div class="logo">
+    <a class="logo" href="#home">
       <div class="logo-pill logo-icon-pill">
         <img src="assets/Logo.svg" alt="SemanticForce" width="59" height="40" />
       </div>
@@ -409,92 +546,359 @@
         <span class="logo-line-1">SemanticForce</span>
         <span class="logo-line-2">Group</span>
       </div>
-    </div>
+    </a>
     <span class="header-meta">Internal project index · chife-mod</span>
   </header>
 
   <main>
 
-    <!-- ─── ONLINE ─── -->
-    <section class="section">
+    <!-- ════════ HOME — главный экран ════════ -->
+    <section id="home" class="screen active">
+      <div class="hero">
+        <div class="hero-label">
+          <span class="hero-label-dot"></span>
+          <span>SF Group · Client Work</span>
+        </div>
+        <h1 class="hero-title">Projects <span>Dashboard</span></h1>
+        <p class="hero-sub">Каталог клиентских артефактов SemanticForce Group. Раздел → конкретный отчёт/прототип. Фильтры по бренду, платформе, клиенту, типу.</p>
+      </div>
+
+      <div class="grid">
+        <a class="category-tile" href="#green-reports">
+          <div class="category-tile-name">Green <span>Reports</span></div>
+          <p class="category-tile-desc">Горизонтальные PDF-отчёты в зелёном шаблоне — Watch Media, Sachet Weekly Pulse и переиспользуемые шаблоны слайдов.</p>
+          <div class="category-tile-footer">
+            <span class="category-tile-count">3 артефакта</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <a class="category-tile" href="#linkedin-remotion">
+          <div class="category-tile-name">LinkedIn <span>Remotion</span></div>
+          <p class="category-tile-desc">Вертикальные PDF + Remotion видео для LinkedIn Novelties. Pipeline для motion-графики из watch-аналитики.</p>
+          <div class="category-tile-footer">
+            <span class="category-tile-count">2 артефакта</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <a class="category-tile" href="#prototypes">
+          <div class="category-tile-name">Proto<span>types</span></div>
+          <p class="category-tile-desc">UI-демки и концепты: Market360 Signal Selector, WWG Novelties redesign, BSCC, Manu.ai, SF Product Matching.</p>
+          <div class="category-tile-footer">
+            <span class="category-tile-count">5 артефактов</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <a class="category-tile" href="#tools">
+          <div class="category-tile-name"><span>Tools</span></div>
+          <p class="category-tile-desc">Утилиты команды SF (автоматизация). Пока пусто.</p>
+          <div class="category-tile-footer">
+            <span class="category-tile-count">0 артефактов</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <a class="category-tile" href="#misc">
+          <div class="category-tile-name"><span>Misc</span></div>
+          <p class="category-tile-desc">Не-код артефакты: Google Sheets, документы.</p>
+          <div class="category-tile-footer">
+            <span class="category-tile-count">1 артефакт</span>
+            <span>→</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ════════ GREEN REPORTS ════════ -->
+    <section id="green-reports" class="screen">
+      <nav class="breadcrumb">
+        <a href="#home">Dashboard</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>Green Reports</span>
+      </nav>
+
+      <h2 class="section-title">Green Reports</h2>
+      <p class="section-sub">Горизонтальные PDF-отчёты в зелёном шаблоне.</p>
+
+      <div class="filters" data-filters-for="green-reports">
+        <div class="filter-group">
+          <label>Customer</label>
+          <select data-filter="customer">
+            <option value="">All</option>
+            <option value="sachet">sachet</option>
+            <option value="">— SF-internal</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Type</label>
+          <select data-filter="type">
+            <option value="">All</option>
+            <option value="watch-media">watch-media</option>
+            <option value="weekly-pulse">weekly-pulse</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Platform</label>
+          <select data-filter="platform">
+            <option value="">All</option>
+            <option value="watch360">watch360</option>
+            <option value="market360">market360</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Brand</label>
+          <select data-filter="brand">
+            <option value="">All</option>
+            <option value="watch360">watch360</option>
+            <option value="semanticforce">semanticforce</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- Templates — всегда первая, вне фильтров -->
+        <a class="card templates-card"
+           href="https://chife-mod.github.io/Watch360-PDF-Reports/?report=legacy-templates"
+           target="_blank" rel="noopener">
+          <div class="card-cover">
+            <div class="card-cover-placeholder">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <rect x="6" y="6" width="14" height="14" rx="2" stroke="#00c3d9" stroke-width="1.5"/>
+                <rect x="28" y="6" width="14" height="14" rx="2" stroke="#00c3d9" stroke-width="1.5"/>
+                <rect x="6" y="28" width="14" height="14" rx="2" stroke="#00c3d9" stroke-width="1.5"/>
+                <rect x="28" y="28" width="14" height="14" rx="2" stroke="#00c3d9" stroke-width="1.5"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div class="badge badge-accent">TEMPLATES</div>
+              <div class="card-name">Templates · Green Reports</div>
+            </div>
+            <p class="card-desc">Каталог переиспользуемых слайдов: Cover, Overview, Table, Models, Keyword, Quote, Map. Approved + sandbox.</p>
+            <div class="card-info">
+              <div class="card-info-row">
+                <span class="card-info-icon">🔗</span>
+                <a href="https://github.com/chife-mod/Watch360-PDF-Reports" target="_blank" rel="noopener">chife-mod/Watch360-PDF-Reports</a>
+              </div>
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/reports/green-reports/!templates!/</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Watch Media -->
+        <a class="card"
+           href="https://chife-mod.github.io/Watch360-PDF-Reports/"
+           target="_blank" rel="noopener"
+           data-customer="" data-type="watch-media" data-platform="watch360" data-brand="watch360">
+          <div class="card-cover">
+            <img src="assets/covers/watch360-pdf-reports.png" alt="Watch Media" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div class="badge badge-live">LIVE</div>
+              <div class="card-name">Watch Media · Feb 2026</div>
+            </div>
+            <p class="card-desc">Ежемесячный watch-industry отчёт — dark-theme горизонтальные PDF-слайды из Google Sheets. SF-internal, без customer-обёртки.</p>
+            <div class="card-info">
+              <div class="card-info-tags">
+                <span class="info-tag">type:watch-media</span>
+                <span class="info-tag">platform:watch360</span>
+                <span class="info-tag">brand:watch360</span>
+              </div>
+              <div class="card-info-row">
+                <span class="card-info-icon">🔗</span>
+                <a href="https://github.com/chife-mod/Watch360-PDF-Reports" target="_blank" rel="noopener">chife-mod/Watch360-PDF-Reports</a>
+              </div>
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/reports/green-reports/watch-media/</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Weekly Pulse · Sacet -->
+        <a class="card"
+           href="https://chife-mod.github.io/M360-jewelry-weekly-pulse/"
+           target="_blank" rel="noopener"
+           data-customer="sachet" data-type="weekly-pulse" data-platform="market360" data-brand="semanticforce">
+          <div class="card-cover">
+            <div class="card-cover-placeholder" style="background:#1a3a2e">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="18" stroke="rgba(0,195,217,0.4)" stroke-width="1.5"/>
+                <path d="M12 24L16 18L22 22L28 14" stroke="#00c3d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div class="badge badge-live">LIVE</div>
+              <div class="card-name">Weekly Pulse · Sacet</div>
+            </div>
+            <p class="card-desc">Еженедельный SoMe Insights для Sacet — финальный 11-слайдный отчёт с demand-detail heatmap. Brand: SemanticForce, Platform: Market360.</p>
+            <div class="card-info">
+              <div class="card-info-tags">
+                <span class="info-tag">customer:sachet</span>
+                <span class="info-tag">type:weekly-pulse</span>
+                <span class="info-tag">platform:market360</span>
+                <span class="info-tag">brand:semanticforce</span>
+              </div>
+              <div class="card-info-row">
+                <span class="card-info-icon">🔗</span>
+                <a href="https://github.com/chife-mod/M360-jewelry-weekly-pulse" target="_blank" rel="noopener">chife-mod/M360-jewelry-weekly-pulse</a>
+              </div>
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/reports/green-reports/weekly-pulse/sachet/</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ════════ LINKEDIN REMOTION ════════ -->
+    <section id="linkedin-remotion" class="screen">
+      <nav class="breadcrumb">
+        <a href="#home">Dashboard</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>LinkedIn Remotion</span>
+      </nav>
+
+      <h2 class="section-title">LinkedIn Remotion</h2>
+      <p class="section-sub">Вертикальные PDF + Remotion видео — для LinkedIn Novelties carousel.</p>
+
+      <div class="grid">
+        <a class="card templates-card no-link">
+          <div class="card-cover">
+            <div class="card-cover-placeholder">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <rect x="6" y="6" width="14" height="14" rx="2" stroke="#00c3d9" stroke-width="1.5"/>
+                <rect x="28" y="6" width="14" height="14" rx="2" stroke="#00c3d9" stroke-width="1.5"/>
+                <rect x="6" y="28" width="14" height="14" rx="2" stroke="#00c3d9" stroke-width="1.5"/>
+                <rect x="28" y="28" width="14" height="14" rx="2" stroke="#00c3d9" stroke-width="1.5"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div class="badge badge-accent">TEMPLATES</div>
+              <div class="card-name">Templates · LinkedIn Remotion</div>
+            </div>
+            <p class="card-desc">Title / Параметры / Сегментатор — 3 типа вертикальных шаблонов. Каталог только начат (approved + sandbox пусто).</p>
+            <div class="card-info">
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/reports/linkedin-remotion/!templates!/</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a class="card"
+           href="https://chife-mod.github.io/watch360-linkedin-pdf/"
+           target="_blank" rel="noopener">
+          <div class="card-cover">
+            <img src="assets/covers/watch360-linkedin-pdf.png" alt="LinkedIn PDF" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div class="badge badge-live">LIVE</div>
+              <div class="card-name">LinkedIn PDF</div>
+            </div>
+            <p class="card-desc">Вертикальный PDF generator — премиальные слайды для LinkedIn carousel из Excel-аналитики Watch360.</p>
+            <div class="card-info">
+              <div class="card-info-row">
+                <span class="card-info-icon">🔗</span>
+                <a href="https://github.com/chife-mod/watch360-linkedin-pdf" target="_blank" rel="noopener">chife-mod/watch360-linkedin-pdf</a>
+              </div>
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/reports/linkedin-remotion/report-pdf/</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a class="card"
+           href="https://github.com/chife-mod/watch360-remotion"
+           target="_blank" rel="noopener">
+          <div class="card-cover">
+            <div class="card-cover-placeholder">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="19" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                <path d="M16 13.5L27 20L16 26.5V13.5Z" fill="rgba(255,255,255,0.15)"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div class="badge badge-local">LOCAL</div>
+              <div class="card-name">Remotion Video</div>
+            </div>
+            <p class="card-desc">Анимированные видео-слайды (Remotion) — motion-графика для LinkedIn из тех же данных что и PDF.</p>
+            <div class="card-info">
+              <div class="card-info-row">
+                <span class="card-info-icon">🔗</span>
+                <a href="https://github.com/chife-mod/watch360-remotion" target="_blank" rel="noopener">chife-mod/watch360-remotion</a>
+              </div>
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/reports/linkedin-remotion/report-remotion/</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ════════ PROTOTYPES ════════ -->
+    <section id="prototypes" class="screen">
+      <nav class="breadcrumb">
+        <a href="#home">Dashboard</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>Prototypes</span>
+      </nav>
+
+      <h2 class="section-title">Prototypes</h2>
+      <p class="section-sub">UI-демки и концепты страниц/компонентов.</p>
+
       <div class="grid">
 
-        <a class="card" href="https://chife-mod.github.io/wwg-2026-novelties-redesign/" target="_blank" rel="noopener">
+        <a class="card"
+           href="https://chife-mod.github.io/wwg-2026-novelties-redesign/"
+           target="_blank" rel="noopener">
           <div class="card-cover">
-            <img src="assets/covers/wwg-novelties.png" alt="WWG 2026 Novelties Redesign" loading="lazy" />
+            <img src="assets/covers/wwg-novelties.png" alt="WWG 2026 Novelties" loading="lazy" />
           </div>
           <div class="card-body">
             <div class="card-top">
               <div class="badge badge-live">LIVE</div>
               <div class="card-name">WWG 2026 Novelties Redesign</div>
             </div>
-            <p class="card-desc">Alternative layout for Watch360 Watches & Wonders Geneva 2026 — visual hierarchy over bar charts, watch photos, interactive novelties catalog.</p>
-            <div class="card-footer">
-              <div class="card-tags">
-                <span class="tag">React</span>
-                <span class="tag">Vite</span>
-                <span class="tag">Tailwind</span>
+            <p class="card-desc">Альтернативный layout для Watch360 Watches & Wonders Geneva 2026 — визуальная иерархия, фото часов, каталог новинок.</p>
+            <div class="card-info">
+              <div class="card-info-row">
+                <span class="card-info-icon">🔗</span>
+                <a href="https://github.com/chife-mod/wwg-2026-novelties-redesign" target="_blank" rel="noopener">chife-mod/wwg-2026-novelties-redesign</a>
               </div>
-              <div class="card-arrow">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/prototypes/wwg-2026-novelties-redesign/</span>
               </div>
             </div>
           </div>
         </a>
 
-        <a class="card" href="https://chife-mod.github.io/watch360-linkedin-pdf/" target="_blank" rel="noopener">
-          <div class="card-cover">
-            <img src="assets/covers/watch360-linkedin-pdf.png" alt="Watch360 LinkedIn PDF" loading="lazy" />
-          </div>
-          <div class="card-body">
-            <div class="card-top">
-              <div class="badge badge-live">LIVE</div>
-              <div class="card-name">Watch360 LinkedIn PDF</div>
-            </div>
-            <p class="card-desc">Monthly watch industry analytics — generates premium PDF slides and animated LinkedIn carousels from Excel data. Covers media coverage, brand rankings, novelties.</p>
-            <div class="card-footer">
-              <div class="card-tags">
-                <span class="tag">Vite</span>
-                <span class="tag">React</span>
-                <span class="tag">PDF</span>
-              </div>
-              <div class="card-arrow">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a class="card" href="https://chife-mod.github.io/Watch360-PDF-Reports/" target="_blank" rel="noopener">
-          <div class="card-cover">
-            <img src="assets/covers/watch360-pdf-reports.png" alt="Watch360 PDF Reports" loading="lazy" />
-          </div>
-          <div class="card-body">
-            <div class="card-top">
-              <div class="badge badge-live">LIVE</div>
-              <div class="card-name">Watch360 PDF Reports</div>
-            </div>
-            <p class="card-desc">Premium corporate report generator for Watch 360 — dark-theme 720×450px slides from Google Sheets data. White-label template system for 10+ SF brands.</p>
-            <div class="card-footer">
-              <div class="card-tags">
-                <span class="tag">React</span>
-                <span class="tag">Recharts</span>
-                <span class="tag">Puppeteer</span>
-              </div>
-              <div class="card-arrow">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a class="card" href="https://chife-mod.github.io/Market360_Signal_Selector/" target="_blank" rel="noopener">
+        <a class="card"
+           href="https://chife-mod.github.io/Market360_Signal_Selector/"
+           target="_blank" rel="noopener">
           <div class="card-cover">
             <img src="assets/covers/market360-signal-selector.jpg" alt="Market360 Signal Selector" loading="lazy" />
           </div>
@@ -503,42 +907,109 @@
               <div class="badge badge-live">LIVE</div>
               <div class="card-name">Market360 Signal Selector</div>
             </div>
-            <p class="card-desc">M360 Product Intelligence Platform — signal discovery, competitive analytics, and dashboard for actionable market insights.</p>
-            <div class="card-footer">
-              <div class="card-tags">
-                <span class="tag">Next.js</span>
-                <span class="tag">TypeScript</span>
-                <span class="tag">Tailwind</span>
+            <p class="card-desc">M360 Product Intelligence Platform — signal discovery, конкурентная аналитика и дашборд actionable market insights.</p>
+            <div class="card-info">
+              <div class="card-info-row">
+                <span class="card-info-icon">🔗</span>
+                <a href="https://github.com/chife-mod/M360_C" target="_blank" rel="noopener">chife-mod/M360_C</a>
               </div>
-              <div class="card-arrow">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/prototypes/m360-signal-selector/</span>
               </div>
             </div>
           </div>
         </a>
 
-        <a class="card" href="https://chife-mod.github.io/support-icon/" target="_blank" rel="noopener">
+        <a class="card"
+           href="https://github.com/chife-mod/business-school-command-center"
+           target="_blank" rel="noopener">
           <div class="card-cover">
-            <img src="assets/covers/support-icon.png" alt="Support Icon" loading="lazy" />
+            <div class="card-cover-placeholder" style="background:#13131C">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <rect x="8" y="14" width="32" height="22" rx="2" stroke="#6C5CE7" stroke-width="1.5"/>
+                <path d="M14 30L18 24L24 28L30 18L34 22" stroke="#6C5CE7" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                <circle cx="34" cy="22" r="1.5" fill="#6C5CE7"/>
+              </svg>
+            </div>
           </div>
           <div class="card-body">
             <div class="card-top">
-              <div class="badge badge-live">LIVE</div>
-              <div class="card-name">Support Icon</div>
+              <div class="badge badge-local">LOCAL</div>
+              <div class="card-name">Business School Command Center</div>
             </div>
-            <p class="card-desc">Animated live-support button UI component — glass-morphism pill with micro-interactions, ready for embedding into SF product interfaces.</p>
-            <div class="card-footer">
-              <div class="card-tags">
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-                <span class="tag">UI component</span>
+            <p class="card-desc">Real-time analytics dashboard для бизнес-школ (KSPA, MIM, KMBS) — выручка, NPS, заполняемость, drop-out. Premium dark editorial.</p>
+            <div class="card-info">
+              <div class="card-info-row">
+                <span class="card-info-icon">🔗</span>
+                <a href="https://github.com/chife-mod/business-school-command-center" target="_blank" rel="noopener">chife-mod/business-school-command-center</a>
               </div>
-              <div class="card-arrow">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/prototypes/business-school-command-center/</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a class="card"
+           href="https://github.com/chife-mod/manu-ai"
+           target="_blank" rel="noopener">
+          <div class="card-cover">
+            <div class="card-cover-placeholder" style="background:#0F0F0F">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <rect x="10" y="14" width="28" height="20" rx="10" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                <circle cx="18" cy="24" r="2" fill="rgba(255,255,255,0.5)"/>
+                <circle cx="30" cy="24" r="2" fill="rgba(255,255,255,0.5)"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div class="badge badge-local">LOCAL</div>
+              <div class="card-name">Manu.ai</div>
+            </div>
+            <p class="card-desc">AI-ассистент выбора товара для ретейлеров и производителей. Chat-widget aesthetic (Intercom-style), light brand-layer per client.</p>
+            <div class="card-info">
+              <div class="card-info-row">
+                <span class="card-info-icon">🔗</span>
+                <a href="https://github.com/chife-mod/manu-ai" target="_blank" rel="noopener">chife-mod/manu-ai</a>
+              </div>
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/prototypes/manu-ai/</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a class="card"
+           href="https://github.com/chife-mod/sf-ui-apm"
+           target="_blank" rel="noopener">
+          <div class="card-cover">
+            <div class="card-cover-placeholder" style="background:#0F0F0F">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <rect x="6" y="10" width="18" height="12" rx="2" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                <rect x="24" y="10" width="18" height="12" rx="2" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                <rect x="6" y="26" width="18" height="12" rx="2" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                <rect x="24" y="26" width="18" height="12" rx="2" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div class="badge badge-local">LOCAL</div>
+              <div class="card-name">SF Product Matching</div>
+            </div>
+            <p class="card-desc">UI extension для SF-AI Item View — карточки product-similarity из Market360. Multi-iteration cards-v2..v6.</p>
+            <div class="card-info">
+              <div class="card-info-row">
+                <span class="card-info-icon">🔗</span>
+                <a href="https://github.com/chife-mod/sf-ui-apm" target="_blank" rel="noopener">chife-mod/sf-ui-apm <em style="opacity:0.5">(будет переименован)</em></a>
+              </div>
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/prototypes/sf-product-matching/</span>
               </div>
             </div>
           </div>
@@ -547,98 +1018,34 @@
       </div>
     </section>
 
-    <!-- ─── LOCAL ─── -->
-    <section class="section">
-      <div class="section-header">
-        <div class="section-header-left">
-          <div class="section-indicator">
-            <div class="section-dot local"></div>
-            <span class="section-label">In Progress</span>
-          </div>
-          <h2 class="section-title">Local / Not yet deployed</h2>
-        </div>
-        <span class="section-count">4 projects</span>
-      </div>
-      <div class="divider"></div>
+    <!-- ════════ TOOLS ════════ -->
+    <section id="tools" class="screen">
+      <nav class="breadcrumb">
+        <a href="#home">Dashboard</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>Tools</span>
+      </nav>
+
+      <h2 class="section-title">Tools</h2>
+      <p class="section-sub">Утилиты команды SF для автоматизации работы.</p>
+
       <div class="grid">
+        <div class="empty">Пока пусто. Figma_To_PPT удалён 2026-05-20.</div>
+      </div>
+    </section>
 
-        <a class="card" href="https://github.com/chife-mod/Tina_Karol_PPT" target="_blank" rel="noopener">
-          <div class="card-cover">
-            <img src="assets/covers/slideforge.png" alt="SlideForge" loading="lazy" />
-          </div>
-          <div class="card-body">
-            <div class="card-top">
-              <div class="badge badge-local">LOCAL</div>
-              <div class="card-name">SlideForge</div>
-            </div>
-            <p class="card-desc">Automatic pitch-deck creator — pixel-perfect Figma-to-slide rendering, AI-generated slide types, PDF export via Puppeteer. Unified SF design system.</p>
-            <div class="card-footer">
-              <div class="card-tags">
-                <span class="tag">Next.js</span>
-                <span class="tag">Puppeteer</span>
-                <span class="tag">Tailwind 4</span>
-              </div>
-              <div class="card-arrow">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </a>
+    <!-- ════════ MISC ════════ -->
+    <section id="misc" class="screen">
+      <nav class="breadcrumb">
+        <a href="#home">Dashboard</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>Misc</span>
+      </nav>
 
-        <a class="card" href="https://github.com/chife-mod/Logo-Parser" target="_blank" rel="noopener">
-          <div class="card-cover">
-            <img src="assets/covers/logo-parser.png" alt="Logo Parser" loading="lazy" />
-          </div>
-          <div class="card-body">
-            <div class="card-top">
-              <div class="badge badge-local">LOCAL</div>
-              <div class="card-name">Logo Parser</div>
-            </div>
-            <p class="card-desc">Automated brand logo extraction — scrapes brand sites using schema.org, Shopify, header image, and SVG sprite strategies. 95% success rate across tested brands.</p>
-            <div class="card-footer">
-              <div class="card-tags">
-                <span class="tag">Node.js</span>
-                <span class="tag">Scraper</span>
-              </div>
-              <div class="card-arrow">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </a>
+      <h2 class="section-title">Misc</h2>
+      <p class="section-sub">Не-код артефакты — Google Sheets, документы.</p>
 
-        <a class="card" href="https://github.com/chife-mod/watch360-remotion" target="_blank" rel="noopener">
-          <div class="card-cover" style="background: #111; display: flex; align-items: center; justify-content: center;">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="20" cy="20" r="19" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-              <path d="M16 13.5L27 20L16 26.5V13.5Z" fill="rgba(255,255,255,0.15)"/>
-            </svg>
-          </div>
-          <div class="card-body">
-            <div class="card-top">
-              <div class="badge badge-local">LOCAL</div>
-              <div class="card-name">Watch360 Remotion</div>
-            </div>
-            <p class="card-desc">Animated video slides for LinkedIn — Remotion-based renderer producing motion graphics from watch analytics data. Pairs with the PDF report pipeline.</p>
-            <div class="card-footer">
-              <div class="card-tags">
-                <span class="tag">Remotion</span>
-                <span class="tag">React</span>
-                <span class="tag">Video</span>
-              </div>
-              <div class="card-arrow">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5.5M11.5 2.5V8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </a>
-
+      <div class="grid">
         <div class="card no-link">
           <div class="card-cover">
             <img src="assets/covers/market360-sheets.png" alt="Market360 Google Sheets" loading="lazy" />
@@ -648,20 +1055,64 @@
               <div class="badge badge-local">LOCAL</div>
               <div class="card-name">Market360 Google Sheets</div>
             </div>
-            <p class="card-desc">Formatted analytics report in Google Sheets for Market 360 — Bilstein search-demand data, keyword × geo × monthly volume, branded for client presentation.</p>
-            <div class="card-footer">
-              <div class="card-tags">
-                <span class="tag">Google Sheets</span>
-                <span class="tag">Analytics</span>
+            <p class="card-desc">Форматированный аналитический отчёт в Google Sheets для Market 360 — Bilstein search-demand data, keyword × geo × monthly volume.</p>
+            <div class="card-info">
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/misc/m360-sheets/</span>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
   </main>
+
+  <script>
+    // ─── Simple hash-router ───
+    function showScreen() {
+      const hash = location.hash || '#home';
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      const target = document.querySelector(hash) || document.querySelector('#home');
+      target.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+    window.addEventListener('hashchange', showScreen);
+    showScreen();
+
+    // ─── Filters (data-attributes на карточках) ───
+    document.querySelectorAll('.filters').forEach(filtersEl => {
+      const screenId = filtersEl.dataset.filtersFor;
+      const screen = document.getElementById(screenId);
+      const selects = filtersEl.querySelectorAll('select');
+
+      function applyFilters() {
+        const filterValues = {};
+        selects.forEach(s => {
+          if (s.value) filterValues[s.dataset.filter] = s.value;
+        });
+
+        screen.querySelectorAll('.card').forEach(card => {
+          // Templates-карточка вне фильтров — всегда видна
+          if (card.classList.contains('templates-card')) {
+            card.classList.remove('hidden');
+            return;
+          }
+          let match = true;
+          for (const [key, val] of Object.entries(filterValues)) {
+            if (card.dataset[key] !== val) {
+              match = false;
+              break;
+            }
+          }
+          card.classList.toggle('hidden', !match);
+        });
+      }
+
+      selects.forEach(s => s.addEventListener('change', applyFilters));
+    });
+  </script>
 
 </body>
 </html>
