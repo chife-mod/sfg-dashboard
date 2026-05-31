@@ -583,6 +583,15 @@
           </div>
         </a>
 
+        <a class="category-tile" href="#sandbox">
+          <div class="category-tile-name">Sand<span>box</span></div>
+          <p class="category-tile-desc">Drafts and experiments — new layouts before integration into Green Reports. Newest on top.</p>
+          <div class="category-tile-footer">
+            <span class="category-tile-count">1 experiment</span>
+            <span>→</span>
+          </div>
+        </a>
+
         <a class="category-tile" href="#linkedin-remotion">
           <div class="category-tile-name">LinkedIn <span>Remotion</span></div>
           <p class="category-tile-desc">Vertical PDF + Remotion video for LinkedIn carousels.</p>
@@ -596,7 +605,7 @@
           <div class="category-tile-name">Proto<span>types</span></div>
           <p class="category-tile-desc">UI demos and page concepts.</p>
           <div class="category-tile-footer">
-            <span class="category-tile-count">5 prototypes</span>
+            <span class="category-tile-count">6 prototypes</span>
             <span>→</span>
           </div>
         </a>
@@ -829,6 +838,64 @@
     </section>
 
     <!-- ════════ LINKEDIN REMOTION ════════ -->
+    <!-- ════════ SANDBOX ════════ -->
+    <!-- Newest experiments on top. New entries go directly after <div class="grid"> -->
+    <section id="sandbox" class="screen">
+      <nav class="breadcrumb">
+        <a href="#home">Dashboard</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>Sandbox</span>
+      </nav>
+
+      <h2 class="section-title">Sandbox</h2>
+      <p class="section-sub">Drafts and experiments before integration into <a href="#green-reports" style="color: var(--accent); text-decoration: none;">Green Reports</a>. Newest on top.</p>
+
+      <div class="grid">
+        <!-- Watch Influencers v0 — added 2026-05-22 -->
+        <div class="card templates-card">
+          <a class="card-link"
+             href="https://chife-mod.github.io/sf-vulcain-monthly-pulse/"
+             target="_blank" rel="noopener"
+             aria-label="Watch Influencers v0 — Sandbox"></a>
+          <div class="card-cover">
+            <div class="card-cover-placeholder">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                <rect x="6"  y="10" width="46" height="2" rx="1" fill="#00c3d9" opacity="0.85"/>
+                <rect x="6"  y="17" width="32" height="2" rx="1" fill="#00c3d9" opacity="0.65"/>
+                <rect x="6"  y="24" width="40" height="2" rx="1" fill="#00c3d9" opacity="0.55"/>
+                <rect x="6"  y="31" width="22" height="2" rx="1" fill="#00c3d9" opacity="0.45"/>
+                <rect x="6"  y="38" width="36" height="2" rx="1" fill="#00c3d9" opacity="0.35"/>
+                <rect x="6"  y="45" width="14" height="2" rx="1" fill="#00c3d9" opacity="0.25"/>
+                <circle cx="54" cy="50" r="6" stroke="#00c3d9" stroke-width="1.5" fill="none" opacity="0.7"/>
+                <circle cx="54" cy="50" r="2.5" fill="#00c3d9" opacity="0.6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div class="badge badge-accent">SANDBOX · v0</div>
+              <div class="card-name">Watch Influencers</div>
+            </div>
+            <p class="card-desc"><code>SF-GR-WATCH-INFLUENCERS</code>. Ranked authors table + Total Combined Reach + Audience by Platform / Country. Preview lives inside Vulcain Apr 2026 slide 05.</p>
+            <div class="card-info">
+              <div class="card-info-row">
+                <span class="card-info-icon">🔗</span>
+                <a href="https://github.com/chife-mod/sfg-reports/blob/main/shared/slides/SandboxWatchInfluencersSlide.tsx" target="_blank" rel="noopener">SandboxWatchInfluencersSlide.tsx</a>
+              </div>
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/sfg-reports/shared/slides/SandboxWatchInfluencersSlide.tsx</span>
+              </div>
+              <div class="card-info-row">
+                <span class="card-info-icon">📅</span>
+                <span class="card-info-path">Added 2026-05-22</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="linkedin-remotion" class="screen">
       <nav class="breadcrumb">
         <a href="#home">Dashboard</a>
@@ -941,6 +1008,34 @@
       <p class="section-sub">UI demos and page concepts.</p>
 
       <div class="grid">
+
+        <div class="card"
+             data-customer="__sf-internal__" data-type="pharma-portal" data-platform="market360" data-brand="market360">
+          <a class="card-link"
+             href="https://chife-mod.github.io/sf-pharma-360/"
+             target="_blank" rel="noopener"
+             aria-label="SF Pharma 360"></a>
+          <div class="card-cover">
+            <img src="assets/covers/sf-pharma-360.jpg" alt="SF Pharma 360" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div class="card-top">
+              <div class="badge badge-live">LIVE</div>
+              <div class="card-name">SF Pharma 360</div>
+            </div>
+            <p class="card-desc">Redesign of pharma.market360.ai — Next.js + shadcn + Tabler. Modern dark UI for tracking DOLs, disease signals and brand mentions in pharma.</p>
+            <div class="card-info">
+              <div class="card-info-row">
+                <span class="card-info-icon">🔗</span>
+                <a href="https://github.com/chife-mod/sf-pharma-360" target="_blank" rel="noopener">chife-mod/sf-pharma-360</a>
+              </div>
+              <div class="card-info-row">
+                <span class="card-info-icon">📁</span>
+                <span class="card-info-path">vsevolod/prototypes/sf-pharma-360/</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="card"
              data-customer="__sf-internal__" data-type="novelties" data-platform="watch360" data-brand="watch360">
