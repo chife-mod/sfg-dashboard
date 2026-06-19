@@ -423,6 +423,21 @@
       border: 1px solid rgba(0, 195, 217, 0.25);
     }
 
+    .badge-soon {
+      background: rgba(245, 158, 11, 0.12);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.22);
+    }
+
+    .badge-soon::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #f59e0b;
+    }
+
     .card-desc {
       font-size: 13px;
       color: var(--text-secondary);
@@ -987,10 +1002,10 @@
           </div>
           <div class="card-body">
             <div class="card-top">
-              <div class="badge badge-accent">TEMPLATES</div>
+              <div class="badge badge-soon">COMING SOON</div>
               <div class="card-name">Templates · LinkedIn Remotion</div>
             </div>
-            <p class="card-desc">Title / Stats / Segmenter — 3 vertical template types. Catalog just started.</p>
+            <p class="card-desc">Title / Stats / Segmenter — 3 vertical template types. Catalog in development, not published yet.</p>
             <div class="card-info">
               <div class="card-info-row">
                 <span class="card-info-icon">📁</span>
