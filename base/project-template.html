@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>PROJECT NAME — Preview Dashboard</title>
+
+<!-- Favicon: studio-blue square + brand initial. Change only the letter. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23116490'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='42' fill='white'%3EX%3C/text%3E%3C/svg%3E">
+
+<!-- ════════════════════════════════════════════════════════════════
+     Vsevolod shared dashboard base — DO NOT copy chrome per project.
+     This file is a thin shell: only PREVIEW_CONFIG changes per project.
+     The launcher layout, the nav pill and the doc viewer all live in
+     the base and are loaded from the SF Group dashboard. Edit the base
+     once → every Vsevolod subproject updates.
+     ════════════════════════════════════════════════════════════════ -->
+<link rel="stylesheet" href="https://chife-mod.github.io/sfg-dashboard/base/launcher.css">
+<link rel="stylesheet" href="https://chife-mod.github.io/sfg-dashboard/base/service-menu.css">
+</head>
+<body>
+
+<script>
+  // ─── The ONLY per-project content. Edit this object, nothing else. ───
+  window.PREVIEW_CONFIG = {
+    project: "PROJECT NAME",
+    title:   "PROJECT NAME · Design Dashboard",
+
+    // Openable preview pages (tiles). status:"planned" dims a not-built tile.
+    previews: [
+      { tag: "Active · Latest",     title: "Wireframe", desc: "Lo-fi landing structure.", href: "wireframe/" },
+      { tag: "Foundation · UI Kit", title: "UI Kit",    desc: "Tokens & components.",      href: "uikit/" },
+      { tag: "Planned · Stage 03",  title: "Design",    desc: "Hi-fi visual design.",      status: "planned" },
+      { tag: "Planned · Stage 04",  title: "Front-end", desc: "Production build.",         status: "planned" }
+    ],
+
+    // Documentation cards. icon: doc | globe | chat | repo | link.
+    // For markdown docs use the shared viewer with an ABSOLUTE same-origin path:
+    docs: [
+      { label: "Client Brief", sub: "Project context · BRIEF.md", icon: "doc",
+        href: "https://chife-mod.github.io/sfg-dashboard/base/viewer.html?file=/PROJECT-SLUG/BRIEF.md&home=/PROJECT-SLUG/" }
+    ],
+
+    // Project phases. status: done | active | pending. progress: 0..100.
+    stages: [
+      { name: "Brief & content", status: "done",    progress: 100, label: "Done" },
+      { name: "Wireframe",       status: "active",  progress: 60,  label: "In progress" },
+      { name: "Design",          status: "pending", progress: 0,   label: "Pending" },
+      { name: "Front-end build", status: "pending", progress: 0,   label: "Pending" },
+      { name: "Deploy & handoff",status: "pending", progress: 0,   label: "Pending" }
+    ],
+
+    meta: [
+      { dt: "Stack", dd: "HTML · CSS · vanilla JS — same stack as other SF landings" },
+      { dt: "Production target", label: "example.com", href: "https://example.com" }
+    ],
+
+    // Nav pill (preview pages only). Keep paths relative to the project root.
+    versions: [
+      { id: "wireframe", label: "PROJECT NAME · Wireframe", desc: "Lo-fi landing structure", path: "wireframe/" },
+      { id: "uikit",     label: "PROJECT NAME · UI Kit",    desc: "Tokens & components",     path: "uikit/" },
+      { id: "launcher",  label: "PROJECT NAME · Dashboard", desc: "Main launcher",           path: "" }
+    ]
+  };
+</script>
+
+<script defer src="https://chife-mod.github.io/sfg-dashboard/base/launcher.js"></script>
+<script defer src="https://chife-mod.github.io/sfg-dashboard/base/service-menu.js"></script>
+</body>
+</html>
