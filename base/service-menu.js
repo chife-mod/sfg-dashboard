@@ -63,7 +63,10 @@
         return v.id;
       }
     }
-    return DEFAULT_VERSION_ID;
+    // No sub-path matched → we are at the project root (the launcher).
+    // Prefer the version whose path is "" (the launcher entry).
+    var rootV = VERSIONS.find(function (v) { return !v.path; });
+    return (rootV && rootV.id) || DEFAULT_VERSION_ID;
   }
 
   /* ── Inline SVGs ── */
